@@ -1,0 +1,150 @@
+void setup(){
+  size(540,720);
+}
+
+void draw() {
+  
+}
+
+void mousePressed() {
+  background(0);
+  
+  float y1 = random(120, 240);
+  float h1 = random(240, 360);
+  float w2 = random(60, 480);
+  float w3 = 540-w2;
+  float w4 = random(60, 480);
+  float y4 = y1+h1;
+  float h4 = 720-y4;
+  float w5 = 540-w4;
+  
+  fill(random(255), random(255), random(255));
+  rect(0, y1, 540, h1);
+  noStroke();
+  
+  float x11 = 280;
+  float y11 = y1 + h1/2;
+  float topX1 = x11;
+  float topY1 = y11 - h1/3;
+  float bottomX1 = x11;
+  float bottomY1 = y11 + h1/3;
+  float left1X1 = x11 - 180;
+  float left1Y1 = y11 - h1/6;
+  float left2X1 = x11 - 180;
+  float left2Y1 = y11 + h1/6;
+  float right1X1 = x11 + 180;
+  float right1Y1 = y11 - h1/6;
+  float right2X1 = x11 + 180;
+  float right2Y1 = y11 + h1/6;
+  
+  fill(random(255), random(255), random(255));
+  quad(left1X1, left1Y1, topX1, topY1, right1X1, right1Y1, x11, y11);
+  fill(random(255), random(255), random(255));
+  quad(left1X1, left1Y1, left2X1, left2Y1, bottomX1, bottomY1, x11, y11);
+  fill(random(255), random(255), random(255));
+  quad(right1X1, right1Y1, right2X1, right2Y1, bottomX1, bottomY1, x11, y11);
+
+  fill(random(255), random(255), random(255));
+  rect(0, 0, w2, y1);
+  noStroke();
+  
+  float x22 = w2/2;
+  float y22 = y1/2;
+  float topX2 = x22;
+  float topY2 = y22 - y1/3;
+  float bottomX2 = x22;
+  float bottomY2 = y22 + y1/3;
+  float left1X2 = x22 - w2/3;
+  float left1Y2 = y22 - y1/6;
+  float left2X2 = x22 - w2/3;
+  float left2Y2 = y22 + y1/6;
+  float right1X2 = x22 + w2/3;
+  float right1Y2 = y22 - y1/6;
+  float right2X2 = x22 + w2/3;
+  float right2Y2 = y22 + y1/6;
+  
+  fill(random(255), random(255), random(255));
+  quad(left1X2, left1Y2, topX2, topY2, right1X2, right1Y2, x22, y22);
+  fill(random(255), random(255), random(255));
+  quad(left1X2, left1Y2, left2X2, left2Y2, bottomX2, bottomY2, x22, y22);
+  fill(random(255), random(255), random(255));
+  quad(right1X2, right1Y2, right2X2, right2Y2, bottomX2, bottomY2, x22, y22);
+  
+  fill(random(255), random(255), random(255));
+  rect(w2, 0, w3, y1);
+  noStroke();
+  
+  float x33 = 540 - w3/2;
+  float y33 = y1/2;
+  float topX3 = x33;
+  float topY3 = y33 - y1/3;
+  float bottomX3 = x33;
+  float bottomY3 = y33 + y1/3;
+  float left1X3 = x33 - w3/3;
+  float left1Y3 = y33 - y1/6;
+  float left2X3 = x33 - w3/3;
+  float left2Y3 = y33 + y1/6;
+  float right1X3 = x33 + w3/3;
+  float right1Y3 = y33 - y1/6;
+  float right2X3 = x33 + w3/3;
+  float right2Y3 = y33 + y1/6;
+  
+  fill(random(255), random(255), random(255));
+  quad(left1X3, left1Y3, topX3, topY3, right1X3, right1Y3, x33, y33);
+  fill(random(255), random(255), random(255));
+  quad(left1X3, left1Y3, left2X3, left2Y3, bottomX3, bottomY3, x33, y33);
+  fill(random(255), random(255), random(255));
+  quad(right1X3, right1Y3, right2X3, right2Y3, bottomX3, bottomY3, x33, y33);
+  
+  fill(random(255), random(255), random(255));
+  rect(0, y4, w4, h4);
+  noStroke();
+  
+  float x44 = w4/2;
+  float y44 = y4 + h4/2;
+  float topX4 = x44;
+  float topY4 = y44 - h4/3;
+  float bottomX4 = x44;
+  float bottomY4 = y44 + h4/3;
+  float left1X4 = x44 - w4/3;
+  float left1Y4 = y44 - h4/6;
+  float left2X4 = x44 - w4/3;
+  float left2Y4 = y44 + h4/6;
+  float right1X4 = x44 + w4/3;
+  float right1Y4 = y44 - h4/6;
+  float right2X4 = x44 + w4/3;
+  float right2Y4 = y44 + h4/6;
+  
+  fill(random(255), random(255), random(255));
+  quad(left1X4, left1Y4, topX4, topY4, right1X4, right1Y4, x44, y44);
+  fill(random(255), random(255), random(255));
+  quad(left1X4, left1Y4, left2X4, left2Y4, bottomX4, bottomY4, x44, y44);
+  fill(random(255), random(255), random(255));
+  quad(right1X4, right1Y4, right2X4, right2Y4, bottomX4, bottomY4, x44, y44);
+  
+  fill(random(255), random(255), random(255));
+  rect(w4, y4, w5, h4);
+  noStroke();
+  
+  float x55 = 540 - w5/2;
+  float y55 = y4 + h4/2;
+  float topX5 = x55;
+  float topY5 = y55 - h4/3;
+  float bottomX5 = x55;
+  float bottomY5 = y55 + h4/3;
+  float left1X5 = x55 - w5/3;
+  float left1Y5 = y55 - h4/6;
+  float left2X5 = x55 - w5/3;
+  float left2Y5 = y55 + h4/6;
+  float right1X5 = x55 + w5/3;
+  float right1Y5 = y55 - h4/6;
+  float right2X5 = x55 + w5/3;
+  float right2Y5 = y55 + h4/6;
+  
+  fill(random(255), random(255), random(255));
+  quad(left1X5, left1Y5, topX5, topY5, right1X5, right1Y5, x55, y55);
+  fill(random(255), random(255), random(255));
+  quad(left1X5, left1Y5, left2X5, left2Y5, bottomX5, bottomY5, x55, y55);
+  fill(random(255), random(255), random(255));
+  quad(right1X5, right1Y5, right2X5, right2Y5, bottomX5, bottomY5, x55, y55);
+}
