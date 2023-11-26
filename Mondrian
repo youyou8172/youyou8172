@@ -1,0 +1,150 @@
+int numPoints = 30; // 点的数量
+int lineLength = 200; // 直线的初始长度
+float lineSpeed = 2.0; // 直线的速率
+
+ArrayList<PVector> points, rect_points; // 存储选取的点
+ArrayList<Float> lineLengths; // 存储直线的当前长度
+ArrayList<Float> rectX, rectY, rectMx, rectMy;
+
+void setup() {
+  size(600, 600);
+  background(255);
+  generatePoints();
+  frameRate(60); // 设置帧率为60帧/秒
+}
+
+void generatePoints() {
+  points = new ArrayList<PVector>();
+  lineLengths = new ArrayList<Float>();
+
+  // 随机选取点
+  for (int i = 0; i < numPoints; i++) {
+    float x = random(width);
+    float y = random(height);
+    PVector point = new PVector(x, y);
+    points.add(point);
+    lineLengths.add(0.0); // 初始化直线的当前长度为0
+  }
+}
+
+PVector get_nearest_point(PVector u) {
+  float min_dist = 100000000;
+  PVector ans = u;
+  for (int i = 0; i < points.size(); i++) {
+    PVector v = points.get(i);
+    if (u.x > v.x || u.y > v.y) {
+      continue;
+    }
+    if ((u.x - v.x) * (u.x - v.x) + (u.y - v.y) * (u.y - v.y) < 0.001) {
+      continue;
+    }
+    if ((u.x - v.x) * (u.x - v.x) + (u.y - v.y) * (u.y - v.y) < min_dist) {
+      min_dist = (u.x - v.x) * (u.x - v.x) + (u.y - v.y) * (u.y - v.y);
+      ans = v;
+    }
+  }
+  return ans;
+}
+
+void generateRect() {
+  for (int i = 0; i < 24; i++) {
+      // red
+      PVector point1 = points.get(int(random(points.size())));
+      PVector point2 = get_nearest_point(point1);
+      rect_points.add(point1);
+      rectX.add(0.0); // current rectangle width and height
+      rectY.add(0.0);
+      rectMx.add(point2.x-point1.x); // max rectangle width and height
+      rectMy.add(point2.y-point1.y);
+    }
+}
+
+boolean line_finish = false, rect_finish = false;
+void draw() {
+  
+  if (line_finish) {
+    if (rect_finish) {
+      return;
+    }
+    
+
+    
+    for (int i = 0; i < 60; i++) {
+      // blue
+      PVector point1 = points.get(int(random(points.size())));
+      PVector point2 = get_nearest_point(point1);
+      fill(0, 0, 255);
+      rect(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
+    }
+    for (int i = 0; i < 40; i++) {
+      // yellow
+      PVector point1 = points.get(int(random(points.size())));
+      PVector point2 = get_nearest_point(point1);
+      fill(255, 255, 0);
+      rect(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
+    }
+    for (int i = 0; i < 20; i++) {
+      // red
+      PVector point1 = points.get(int(random(points.size())));
+      PVector point2 = get_nearest_point(point1);
+      fill(255, 0, 0);
+      rect(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
+    }
+    
+    rect_finish = true;
+      for (int i = 0; i < points.size(); i++) {
+        PVector point = points.get(i);
+        float x = point.x;
+        float y = point.y;
+        float length = lineLengths.get(i);
+    
+        // 向水平方向绘制直线
+        float x1 = x - length;
+        float x2 = x + length;
+        line(x1, y, x2, y);
+    
+        // 向垂直方向绘制直线
+        float y1 = y - length;
+        float y2 = y + length;
+        line(x, y1, x, y2);
+    
+        // 更新直线的当前长度
+        if (length < lineLength) {
+          lineLengths.set(i, length + lineSpeed);
+          line_finish = false;
+        }
+      }
+    return;
+  }
+  background(255);
+
+  // 绘制直线
+  line_finish = true;
+  for (int i = 0; i < points.size(); i++) {
+    PVector point = points.get(i);
+    float x = point.x;
+    float y = point.y;
+    float length = lineLengths.get(i);
+
+    // 向水平方向绘制直线
+    float x1 = x - length;
+    float x2 = x + length;
+    line(x1, y, x2, y);
+
+    // 向垂直方向绘制直线
+    float y1 = y - length;
+    float y2 = y + length;
+    line(x, y1, x, y2);
+
+    // 更新直线的当前长度
+    if (length < lineLength) {
+      lineLengths.set(i, length + lineSpeed);
+      line_finish = false;
+    }
+  }
+  
+  
+
+  // 延迟一段时间，以控制绘制速率
+  delay(10);
+}
