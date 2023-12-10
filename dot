@@ -1,0 +1,67 @@
+PImage sourceImage;
+PImage creativeImage;
+int tileSize = 20; 
+
+void setup() {
+  size(600, 600);
+  sourceImage = loadImage("source.jpg");
+  sourceImage.resize(width, height);
+  creativeImage = createImage(width, height, RGB);
+}
+
+void draw() {
+  background(255);
+  image(creativeImage, 0, 0);
+  processImage();
+  frameRate(10);   
+}
+
+void processImage() {
+  creativeImage.loadPixels();
+  sourceImage.loadPixels();
+  
+  for (int y = 0; y < sourceImage.height; y += tileSize) {
+    for (int x = 0; x < sourceImage.width; x += tileSize) {
+      int loc = x + y * sourceImage.width;
+
+      color mosaicColor = getMosaicColor(x, y);
+
+      float amplitude = random(tileSize, tileSize*3);
+      float frequency = random(0.01, 0.1);
+      float phase = random(0, TWO_PI);
+
+      float radius = amplitude * sin(frequency * frameCount + phase) + tileSize / 2;
+      
+      int centerX = x + tileSize / 2;
+      int centerY = y + tileSize / 2;
+      fill(mosaicColor);
+      noStroke();
+      ellipse(centerX, centerY, radius, radius);
+    }
+  }
+}
+
+color getMosaicColor(int x, int y) {
+  int sumR = 0;
+  int sumG = 0;
+  int sumB = 0;
+  int count = 0;
+  
+  // 计算马赛克块中所有像素的颜色之和
+  for (int mosaicY = y; mosaicY < y + tileSize; mosaicY++) {
+    for (int mosaicX = x; mosaicX < x + tileSize; mosaicX++) {
+      int mosaicLoc = mosaicX + mosaicY * sourceImage.width;
+      color pixelColor = sourceImage.pixels[mosaicLoc];
+      sumR += red(pixelColor);
+      sumG += green(pixelColor);
+      sumB += blue(pixelColor);
+      count++;
+    }
+  }
+  
+  int avgR = sumR / count;
+  int avgG = sumG / count;
+  int avgB = sumB / count;
+  
+  return color(avgR, avgG, avgB);
+}
